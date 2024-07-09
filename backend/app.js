@@ -1,11 +1,17 @@
 require("dotenv").config();
+const cors = require("cors");
 const express = require("express");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 //! Express instance
 const app = express();
 //! Middleware instance
+const corsOptions = {
+  origin: ["http://localhost:5173", "http://localhost:5174"],
+};
 app.use(express.json());
+app.use(cors(corsOptions));
+
 // Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
